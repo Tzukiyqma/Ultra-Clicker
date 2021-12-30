@@ -1,14 +1,25 @@
 if game.PlaceId == 6512923934 then
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Tzu Hub Ultra Clickers", "Synapse")
+local Window = Library.CreateLib("Tzu Hub - Ultra Clickers", "Synapse")
 local Main = Window:NewTab("Main")
-local MainSection = Main:NewSection("Main")
+local MainSection = Main:NewSection("Functions")
 MainSection:NewToggle("Auto Tap", "Taps automatically", function(v)
     getgenv().autoTap = v
     while true do
         if not getgenv().autoTap then return end
         workspace.Events.AddClick:FireServer()
         wait()
+
+        local Player = Window:NewTab("Player")
+        local PlayerSection = Player:NewSection("Functions")
+     
+        PlayerSection:NewSlider("Walkspeed", "Changes the walkspeed", 250, 16, function(v)
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+        end)
+     
+        PlayerSection:NewSlider("Jumppower", "Changes the jumppower", 250, 50, function(v)
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+        end)
 end
 end)
 end
